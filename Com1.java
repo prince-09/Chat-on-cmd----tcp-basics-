@@ -11,7 +11,7 @@ public class Com1{
             System.out.println(str);
             do{
                 str = (String)din.readUTF();
-                System.out.println("client says: " + str);
+                System.out.println(str);
             }while(str.charAt(0) != '-');
         }
         catch(Exception e){
