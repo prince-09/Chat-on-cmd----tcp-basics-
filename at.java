@@ -7,6 +7,7 @@ public class at{
         try{
             String ipaddr = "127.0.0.1"; // write here ip addr of com 1  
             Socket socket = new Socket(ipaddr,7);
+            boolean ind=false;
             DataOutputStream out=new DataOutputStream(socket.getOutputStream());
             DataInputStream in=new DataInputStream(new BufferedInputStream(socket.getInputStream()));
             String opt="";
@@ -16,13 +17,20 @@ public class at{
             Scanner sc = new Scanner(System.in);
             String str1;
             while(!opt.equals("Bye")){
+                if(!ind){
                 do{
-                    line = sc.nextLine();
-                    out.writeUTF(line);
-                }while(!line.equals("over"));
+                    opt = sc.nextLine();
+                    ind=true;
+                    out.writeUTF(opt);
+                }while(!opt.equals("over")&&!opt.equals("Bye"));
+            }
+            else{
                 do{
-                    echo=in.readUTF();  
-                }while(!line.equals("over"));
+                    opt=in.readUTF();  
+                    ind=false;
+                    System.out.println(opt);
+                }while(!opt.equals("over")&&!opt.equals("Bye"));
+            }
             }
            
         }
